@@ -46,13 +46,15 @@ type EziApplication = {
      */
     singleInstance?: boolean;
     /**
-     * 开发环境下的入口路径
+     * 开发环境下的入口路径  
+     * 留空从vite配置中获取
      * @default "http://localhost:5173/"
      * @platform Windows
      */
     devEntry?: string;
     /**
-     * 生产环境下的入口路径
+     * 生产环境下的入口路径  
+     * 留空从vite配置中获取
      * @default "dist"
      * @platform Windows
      */
