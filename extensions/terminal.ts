@@ -1,5 +1,5 @@
 import { call } from "../core/call";
-import version from "../../bridge.js/extensions/version";
+import version from "./version";
 
 const console_log = console.log;
 

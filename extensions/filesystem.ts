@@ -2,11 +2,11 @@
 
 class Filesystem {
 
-    public readPickedFile(): Buffer {
-        return Buffer.from('Picked file contents');
+    public readPickedFile(): Uint8Array {
+        return new TextEncoder().encode('Picked file contents');
     }
 
-    public writePickedFile(data: Buffer): void {
+    public writePickedFile(data: Uint8Array): void {
 
     }
 
@@ -14,11 +14,11 @@ class Filesystem {
         return ['file1.txt', 'file2.txt', 'subdir'];
     }
 
-    public readFile(path: string): Buffer {
-        return Buffer.from(`Contents of ${path}`);
+    public readFile(path: string): Uint8Array {
+        return new TextEncoder().encode(`Contents of ${path}`);
     }
 
-    public writeFile(path: string, data: Buffer): void {
+    public writeFile(path: string, data: Uint8Array): void {
 
     }
 

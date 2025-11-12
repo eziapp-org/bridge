@@ -19,5 +19,31 @@
     "devDependencies": {
         "shx": "^0.4.0",
         "typescript": "^5.9.3"
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        },
+        "./terminal": {
+            "types": "./dist/extensions/terminal.d.ts",
+            "import": "./dist/extensions/terminal.js"
+        },
+        "./filesystem": {
+            "types": "./dist/extensions/filesystem.d.ts",
+            "import": "./dist/extensions/filesystem.js"
+        },
+        "./tray": {
+            "types": "./dist/extensions/tray.d.ts",
+            "import": "./dist/extensions/tray.js"
+        },
+        "./version": {
+            "types": "./dist/extensions/version.d.ts",
+            "import": "./dist/extensions/version.js"
+        },
+        "./windowm": {
+            "types": "./dist/extensions/windowm.d.ts",
+            "import": "./dist/extensions/windowm.js"
+        }
     }
 }
