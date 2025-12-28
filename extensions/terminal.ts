@@ -7,7 +7,8 @@ const isRelease = version.isRelease();
 
 class Terminal {
     /**
-     * 将消息输出到终端（仅调试模式可用）
+     * 将消息输出到系统终端和DevTools（仅调试模式可用）
+     * 生产环境会自动屏蔽该方法，调用后无任何反应
      * @param message 
      * @returns 
      */
@@ -24,7 +25,8 @@ class Terminal {
     }
 
     /**
-     * 将错误消息输出到终端（仅调试模式可用）
+     * 将错误消息输出到终端系统终端和DevTools（仅调试模式可用）
+     * 生产环境会自动屏蔽该方法，调用后无任何反应
      * @param message 
      * @returns 
      */
@@ -40,7 +42,8 @@ class Terminal {
     }
 
     /**
-     * 转发所有错误信息到终端（仅调试模式可用）
+     * 转发所有错误信息到系统终端（仅调试模式可用）
+     * 生产环境会自动屏蔽该方法，调用后无任何反应
      */
     public forwardErrors() {
         if (isRelease) {
