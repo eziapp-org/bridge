@@ -224,51 +224,101 @@ export class Window {
         this.title = title;
     }
     ///////////////////////////////////////////////IS
+
+    /**
+     * 判断窗口是否可最大化
+     * @returns {Promise<boolean>} 窗口是否可最大化
+     */
     public async isMaximizable() {
         return await call(SPACENAME, "isMaximizable", {
             winId: this.id,
         }) as Promise<boolean>;
     }
+
+    /**
+     * 判断窗口是否已最大化
+     * @returns {Promise<boolean>} 窗口是否已最大化
+     */
     public async isMaximized() {
         return await call(SPACENAME, "isMaximized", {
             winId: this.id,
         }) as Promise<boolean>;
     }
+
+    /**
+     * 判断窗口是否可最小化
+     * @returns {Promise<boolean>} 窗口是否可最小化
+     */
     public async isMinimizable() {
         return await call(SPACENAME, "isMinimizable", {
             winId: this.id,
         }) as Promise<boolean>;
     }
+
+    /**
+     * 判断窗口是否已最小化
+     * @returns {Promise<boolean>} 窗口是否已最小化
+     */
     public async isMinimized() {
         return await call(SPACENAME, "isMinimized", {
             winId: this.id,
         }) as Promise<boolean>;
     }
+
+    /**
+     * 判断窗口是否可移动
+     * @returns {Promise<boolean>} 窗口是否可移动
+     */
     public async isMovable() {
         return await call(SPACENAME, "isMovable", {
             winId: this.id,
         }) as Promise<boolean>;
     }
+
+    /**
+     * 判断窗口是否已关闭
+     * @returns {Promise<boolean>} 窗口是否已关闭
+     */
     public async isClosed() {
         return await call(SPACENAME, "isClosed", {
             winId: this.id,
         }) as Promise<boolean>;
     }
+
+    /**
+     * 判断窗口是否可聚焦
+     * @returns {Promise<boolean>} 窗口是否可聚焦
+     */
     public async isFocusable() {
         return await call(SPACENAME, "isFocusable", {
             winId: this.id,
         }) as Promise<boolean>;
     }
+
+    /**
+     * 判断窗口是否已聚焦
+     * @returns {Promise<boolean>} 窗口是否已聚焦
+     */
     public async isFocused() {
         return await call(SPACENAME, "isFocused", {
             winId: this.id,
         }) as Promise<boolean>;
     }
+
+    /**
+     * 判断窗口是否可见
+     * @returns {Promise<boolean>} 窗口是否可见
+     */
     public async isVisible() {
         return await call(SPACENAME, "isVisible", {
             winId: this.id,
         }) as Promise<boolean>;
     }
+
+    /**
+     * 判断窗口是否无边框
+     * @returns {Promise<boolean>} 窗口是否无边框
+     */
     public async isBorderless() {
         return await call(SPACENAME, "isBorderless", {
             winId: this.id,
@@ -276,16 +326,31 @@ export class Window {
     }
 
     ///////////////////////////////////////////////GET
+
+    /**
+     * 获取窗口的背景模式
+     * @returns {Promise<BackgroundMode>} 窗口的背景模式
+     */
     public async getBackgroundMode() {
         return await call(SPACENAME, "getBackgroundMode", {
             winId: this.id,
-        }) as BackgroundMode;
+        }) as Promise<BackgroundMode>;
     }
+
+    /**
+     * 获取窗口的尺寸
+     * @returns {Promise<{width: number; height: number}>} 窗口的尺寸
+     */
     public async getSize() {
         return await call(SPACENAME, "getSize", {
             winId: this.id,
         }) as Promise<{ width: number; height: number }>;
     }
+
+    /**
+     * 获取窗口的位置
+     * @returns {Promise<{x: number; y: number}>} 窗口的位置
+     */
     public async getPosition() {
         return await call(SPACENAME, "getPosition", {
             winId: this.id,
@@ -293,6 +358,12 @@ export class Window {
     }
 
     ///////////////////////////////////////////////SET
+
+    /**
+     * 设置窗口的标题
+     * @param title 窗口的标题
+     * @returns {Promise<"success">} 设置结果
+     */
     public async setTitle(title: string) {
         const res = await call(SPACENAME, "setTitle", {
             winId: this.id,
@@ -301,12 +372,24 @@ export class Window {
         this.title = title;
         return res;
     }
+
+    /**
+     * 设置窗口的背景模式
+     * @param mode 窗口的背景模式
+     * @returns {Promise<"success">} 设置结果
+     */
     public async setBackgroundMode(mode: BackgroundMode) {
         return await call(SPACENAME, "setBackgroundMode", {
             winId: this.id,
             mode,
         }) as Promise<"success">;
     }
+
+    /**
+     * 设置窗口的尺寸
+     * @param { width, height } 窗口的宽度和高度
+     * @returns {Promise<"success">} 设置结果
+     */
     public async setSize({ width, height }: { width: number; height: number }) {
         return await call(SPACENAME, "setSize", {
             winId: this.id,
@@ -314,6 +397,12 @@ export class Window {
             height,
         }) as Promise<"success">;
     }
+
+    /**
+     * 设置窗口的位置
+     * @param { x, y } 窗口的左上角坐标
+     * @returns {Promise<"success">} 设置结果
+     */
     public async setPosition({ x, y }: { x: number; y: number }) {
         return await call(SPACENAME, "setPosition", {
             winId: this.id,
@@ -322,6 +411,11 @@ export class Window {
         }) as Promise<"success">;
     }
 
+    /**
+     * 设置窗口是否可最大化
+     * @param enable 是否可最大化
+     * @returns {Promise<"success">} 设置结果
+     */
     public async setMaximizable(enable: boolean) {
         return await call(SPACENAME, "setMaximizable", {
             winId: this.id,
@@ -329,6 +423,11 @@ export class Window {
         }) as Promise<"success">;
     }
 
+    /**
+     * 设置窗口是否可最小化
+     * @param enable 是否可最小化
+     * @returns {Promise<"success">} 设置结果
+     */
     public async setMinimizable(enable: boolean) {
         return await call(SPACENAME, "setMinimizable", {
             winId: this.id,
@@ -336,6 +435,11 @@ export class Window {
         }) as Promise<"success">;
     }
 
+    /**
+     * 设置窗口是否可移动
+     * @param enable 是否可移动
+     * @returns {Promise<"success">} 设置结果
+     */
     public async setMovable(enable: boolean) {
         return await call(SPACENAME, "setMovable", {
             winId: this.id,
@@ -343,6 +447,11 @@ export class Window {
         }) as Promise<"success">;
     }
 
+    /**
+     * 设置窗口是否可聚焦
+     * @param enable 是否可聚焦
+     * @returns {Promise<"success">} 设置结果
+     */
     public async setFocusable(enable: boolean) {
         return await call(SPACENAME, "setFocusable", {
             winId: this.id,
@@ -350,6 +459,11 @@ export class Window {
         }) as Promise<"success">;
     }
 
+    /**
+     * 设置窗口是否无边框
+     * @param enable 是否无边框
+     * @returns {Promise<"success">} 设置结果
+     */
     public async setBorderless(enable: boolean) {
         return await call(SPACENAME, "setBorderless", {
             winId: this.id,
@@ -357,6 +471,12 @@ export class Window {
         }) as Promise<"success">;
     }
 
+    /**
+     * 设置窗口关闭前的提示信息
+     * @param options 提示信息选项
+     * @param callback 回调函数，接收用户选择的结果
+     * @returns 
+     */
     public setBeforeCloseMessage(options: BeforeCloseMessage, callback: BeforeCloseCallback) {
         if (typeof callback !== "function") {
             throw new Error("Callback must be a function");
@@ -384,51 +504,92 @@ export class Window {
     }
 
     ///////////////////////////////////////////////METHODS
+
+    /**
+     * 关闭窗口
+     */
     public async close() {
         return await call(SPACENAME, "close", {
             winId: this.id,
         }) as Promise<"success">;
     }
+
+    /**
+     * 刷新窗口
+     */
     public async reload() {
         return await call(SPACENAME, "reload", {
             winId: this.id,
         }) as Promise<"success">;
     }
+
+    /**
+     * 聚焦到窗口
+     */
     public async focus() {
         return await call(SPACENAME, "focus", {
             winId: this.id,
         }) as Promise<"success">;
     }
+
+    /**
+     * 取消聚焦窗口
+     */
     public async blur() {
         return await call(SPACENAME, "blur", {
             winId: this.id,
         }) as Promise<"success">;
     }
+
+    /**
+     * 最小化窗口
+     */
     public async minimize() {
         return await call(SPACENAME, "minimize", {
             winId: this.id,
         }) as Promise<"success">;
     }
+
+    /**
+     * 最大化窗口
+     */
     public async maximize() {
         return await call(SPACENAME, "maximize", {
             winId: this.id,
         }) as Promise<"success">;
     }
+
+    /**    
+     * 恢复窗口
+     */
     public async restore() {
         return await call(SPACENAME, "restore", {
             winId: this.id,
         }) as Promise<"success">;
     }
+
+    /**
+     * 隐藏窗口
+     * 如果应用程序只有一个窗口并且没有托盘图标，隐藏窗口会导致应用程序退出
+     */
     public async hide() {
         return await call(SPACENAME, "hide", {
             winId: this.id,
         }) as Promise<"success">;
     }
+
+    /**
+     * 拖动窗口
+     */
     public async drag() {
         return await call(SPACENAME, "drag", {
             winId: this.id,
         }) as Promise<"success">;
     }
+
+    /**
+     * 显示窗口
+     */
     public async show() {
         return await call(SPACENAME, "show", {
             winId: this.id,
