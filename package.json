@@ -44,6 +44,10 @@
         "./windowm": {
             "types": "./dist/extensions/windowm.d.ts",
             "import": "./dist/extensions/windowm.js"
+        },
+        "./shortcut": {
+            "types": "./dist/extensions/shortcut.d.ts",
+            "import": "./dist/extensions/shortcut.js"
         }
     }
 }
