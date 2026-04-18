@@ -472,6 +472,18 @@ export class Window {
     }
 
     /**
+     * 设置窗口是否置顶
+     * @param enable 是否置顶
+     * @returns {Promise<"success">} 设置结果
+     */
+    public async setAlwaysOnTop(enable: boolean) {
+        return await call(SPACENAME, "setAlwaysOnTop", {
+            winId: this.id,
+            enable,
+        }) as Promise<"success">;
+    }
+
+    /**
      * 设置窗口关闭前的提示信息
      * @param options 提示信息选项
      * @param callback 回调函数，接收用户选择的结果
