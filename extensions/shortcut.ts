@@ -51,7 +51,7 @@ class Shortcut {
         // 相同触发条件应该使用相同id，避免重复注册
         let id = 0;
         if (options.key.length === 1) {
-            id = options.key.toUpperCase().charCodeAt(0);
+            id = options.key.toLowerCase().charCodeAt(0);
         } else {
             const key = options.key.toLowerCase();
             if (key in specialKeyMap) {
