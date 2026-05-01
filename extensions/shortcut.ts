@@ -4,17 +4,12 @@ const SPACENAME = "shortcut";
 // 快捷键回调管理器
 const shortcutCallbacks = new Map<number, () => void>();
 
-interface options{
+interface options {
     ctrl?: boolean;
     alt?: boolean;
     shift?: boolean;
     meta?: boolean;
     key: string;
-}
-
-// 随机id数字 min max之间的整数
-function randomId(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 class Shortcut {
@@ -25,17 +20,23 @@ class Shortcut {
      * @returns 注册成功返回 "success"，失败 throw 错误信息
      */
     public async register(options: options, callback: () => void) {
-        // 随机id数字
-        const id = randomId(1, 1000000);
+        // id不应该用随机数字
+        // 相同触发条件应该使用相同id，避免重复注册
+        let id = options.key.toUpperCase().charCodeAt(0);
+        if (options.ctrl) id += 1000;
+        if (options.alt) id += 2000;
+        if (options.shift) id += 3000;
+        if (options.meta) id += 4000;
+
         shortcutCallbacks.set(id, callback);
-        const result = await call(SPACENAME, "registerHotKey", {
+
+        const callbackName = '__ShortCutCallback_' + id;
+        (window as any)[callbackName] = callback;
+
+        return await call(SPACENAME, "registerHotKey", {
             id,
             options,
         }) as "success";
-        const callbackName = '__ShortCutCallback_' + id;
-        (window as any)[callbackName] = callback;
-        
-        return result;
     }
 }
 
