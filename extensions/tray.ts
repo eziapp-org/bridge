@@ -1,5 +1,5 @@
 import { call } from "../core/call"
-import { Window } from "./windowm";
+import windowm from "./windowm";
 
 const SPACENAME = "tray";
 
@@ -7,7 +7,7 @@ export type TrayMenuItem = {
     /**
      * 菜单项的类型
      */
-    type: "normal" | "separator" | "submenu";
+    type: "text" | "separator" | "submenu";
 
     /**
      * 菜单项的标签
@@ -33,17 +33,24 @@ export type TrayMenuItem = {
      * 子菜单项，仅当type为submenu时有效
      */
     submenu?: TrayMenuItem[];
+
+    /**
+     * 点击该选项时候的回调函数
+     */
+    onClick?: () => void;
 };
 
 class Tray {
     private menuItems: TrayMenuItem[] = [];
 
     /**
-     * 显示托盘图标
-     * @param mainWindow 指定点击托盘图标时要显示的主窗口
+     * 显示托盘图标  
+     * 点击托盘图标时会显示当前js引擎所在的窗口
      * @returns 
      */
-    public async show(mainWindow: Window) {
+    public async show() {
+        // 获取当前窗口对象
+        const mainWindow = await windowm.getCurrentWindow();
         await call(SPACENAME, "show", {
             mainWindowId: mainWindow.id,
         });
@@ -65,11 +72,15 @@ class Tray {
      * @returns 
      */
     public async setContextMenu(menuItems: TrayMenuItem[]) {
+        (window as any).__TrayMenuItemClickCallbacks_ = {};
         function assignIds(items: TrayMenuItem[], startId: number) {
             for (const item of items) {
                 item.id = startId++;
                 if (item.type === "submenu" && item.submenu) {
                     assignIds(item.submenu, startId);
+                }
+                if (item.type == "text" && typeof item.onClick === "function") {
+                    (window as any)["__TrayMenuItemClickCallbacks_"][`func_${item.id}`] = item.onClick;
                 }
             }
         }
@@ -102,37 +113,6 @@ class Tray {
      */
     public getContextMenu() {
         return this.menuItems;
-    }
-
-    /**
-     * 设置托盘图标菜单项点击回调
-     * @param callback 点击回调函数，参数为被点击的菜单项，参数是被点击的菜单项对象
-     */
-    public setOnClick(callback: (item: TrayMenuItem) => void) {
-        function findMenuItemById(items: TrayMenuItem[], id: number): TrayMenuItem {
-            for (const item of items) {
-                if (item.id === id) {
-                    return item;
-                }
-                if (item.type === "submenu" && item.submenu) {
-                    const found = findMenuItemById(item.submenu, id);
-                    if (found) {
-                        return found;
-                    }
-                }
-            }
-            return {
-                type: "normal",
-                id: -1,
-                label: "unknown"
-            };
-        }
-
-        (window as any)["__TrayMenuItemClickCallback_"] = (id: number) => {
-            const menuItem = findMenuItemById(this.menuItems, id);
-            callback(menuItem);
-        };
-        return "success";
     }
 }
 

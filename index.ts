@@ -1,4 +1,3 @@
-import { TrayMenuItem } from "./extensions/tray";
 import { WindowOptions } from "./extensions/windowm";
 
 type EziApplication = {
@@ -64,7 +63,6 @@ type EziApplication = {
 export type EziConfig = {
     application: EziApplication;
     window?: WindowOptions;
-    tray?: TrayMenuItem[];
 };
 
 export function defineConfig(config: EziConfig) {
