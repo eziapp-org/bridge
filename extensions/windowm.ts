@@ -155,14 +155,6 @@ export type WindowOptions = {
         };
     },
     /**
-     * 窗口的透明度
-     * 范围是0到1
-     * @default 1
-     * @example opacity: 0.5
-     * @platform Windows
-     */
-    opacity?: number;
-    /**
      * 窗口是否无边框
      * @default false
      * @platform Windows
