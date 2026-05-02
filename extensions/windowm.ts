@@ -75,6 +75,15 @@ export type WindowOptions = {
         height: number;
     };
     /**
+     * 窗口的最小尺寸
+     * @default { width: 100, height: 100 }
+     * @platform Windows
+     */
+    minSize?: {
+        width: number;
+        height: number;
+    };
+    /**
      * 窗口的位置
      * @property {x: number, y: number} 窗口的左上角坐标
      * @property "center" 窗口居中显示
@@ -184,8 +193,8 @@ export type WindowOptions = {
      */
     maximizable?: boolean;
     /**
-     * 窗口是否可关闭
-     * @default true
+     * 是否忽略鼠标事件
+     * @default false
      * @platform Windows
      */
     ignoreMouseEvents?: boolean;
@@ -348,6 +357,16 @@ export class Window {
     }
 
     /**
+     * 获取窗口的最小尺寸
+     * @returns {Promise<{width: number; height: number}>} 窗口的最小尺寸
+     */
+    public async getMinSize() {
+        return await call(SPACENAME, "getMinSize", {
+            winId: this.id,
+        }) as Promise<{ width: number; height: number }>;
+    }
+
+    /**
      * 获取窗口的位置
      * @returns {Promise<{x: number; y: number}>} 窗口的位置
      */
@@ -399,6 +418,19 @@ export class Window {
     }
 
     /**
+     * 设置窗口的最小尺寸
+     * @param { width, height } 窗口的最小宽度和高度
+     * @returns {Promise<"success">} 设置结果
+     */
+    public async setMinSize({ width, height }: { width: number; height: number }) {
+        return await call(SPACENAME, "setMinSize", {
+            winId: this.id,
+            width,
+            height,
+        }) as Promise<"success">;
+    }
+
+    /**
      * 设置窗口的位置
      * @param { x, y } 窗口的左上角坐标
      * @returns {Promise<"success">} 设置结果
@@ -442,6 +474,18 @@ export class Window {
      */
     public async setMovable(enable: boolean) {
         return await call(SPACENAME, "setMovable", {
+            winId: this.id,
+            enable,
+        }) as Promise<"success">;
+    }
+
+    /**
+     * 设置窗口是否可改变大小
+     * @param enable 是否可改变大小
+     * @returns {Promise<"success">} 设置结果
+     */
+    public async setResizable(enable: boolean) {
+        return await call(SPACENAME, "setResizable", {
             winId: this.id,
             enable,
         }) as Promise<"success">;
