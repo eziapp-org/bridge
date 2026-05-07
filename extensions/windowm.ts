@@ -61,7 +61,7 @@ export type WindowOptions = {
     src?: string;
     /**
      * 窗口的标题
-     * @default "EziWindow"
+     * @default "EziApplication"
      * @platform Windows
      */
     title?: string;

@@ -15,26 +15,26 @@ type EziApplication = {
     package: string;
     /**
      * 应用的版本号
-     * @default "0.0.0"
+     * @default undefined
      * @platform Windows
      */
     version?: string;
     /**
      * 应用的描述
-     * @default "A Ezi Application"
+     * @default undefined
      * @platform Windows
      */
     description?: string;
     /**
      * 应用的作者
-     * @default "Ezi"
+     * @default undefined
      * @platform Windows
      */
     author?: string;
     /**
      * 应用的图标
      * 仅支持png
-     * @default "icon.png"
+     * @default "image/ezi-logo.png"
      * @platform Windows
      */
     icon?: string;
